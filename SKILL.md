@@ -70,7 +70,28 @@ If the slug is missing, ask via AskUserQuestion listing available profiles (ever
 |------|------|--------|------------|--------|
 | `astronomy-faulkner` | `ProfileAstronomyFaulkner.md` | Ryan Stufflebeam | Danny Faulkner | v0 (seed from Ch 1 review) |
 
-New courses: copy `ProfileTemplate.md` → `Profile<PascalCase>.md` and fill it in.
+## How to Add a New Course Profile
+
+Every new course needs its own profile so the skill inherits its editorial taste. Steps:
+
+1. **Pick a slug** — `<course>-<instructor-last-name>`, all lowercase, hyphen-separated.
+   - Examples: `history-stobaugh`, `bible-jones`, `writing-wilson`
+2. **Copy the template** into a new file in skill root:
+   ```
+   cp ~/.claude/skills/AVScriptEditor/ProfileTemplate.md \
+      ~/.claude/skills/AVScriptEditor/Profile<PascalCase>.md
+   ```
+   Slug → filename mapping is strict: `history-stobaugh` → `ProfileHistoryStobaugh.md`.
+3. **Fill in the profile** — every section in the template matters. Pay special attention to:
+   - `editor` and `instructor` in frontmatter (who owns editorial taste, who teaches the course)
+   - `Density Target` (images per audio time unit)
+   - `Aesthetic Mix` (target distribution across science / historical / text / art)
+   - `Sourcing Priority by Beat Type` (when to use FindScienceMedia vs FindArt)
+   - `Forbidden Moves` — start with 2–3 obvious ones; more accumulate as reviewers give feedback
+4. **Register in the table above** — add a row to the Profiles table in this file.
+5. **Seed from a test pass** — run `BriefOnly` on a short test chapter, get reviewer critique, then run `Workflows/UpdateProfile.md` to lift the profile from v0 (seed) to v1 (first review round).
+
+The profile is a living document. Treat it the way a DP treats a shot list: sharpened every production, never finished.
 
 ## Quick Reference
 
