@@ -50,7 +50,7 @@ Clone into your PAI skills directory:
 
 ```
 cd ~/.claude/skills/
-git clone git@github.com:Compass-Classroom/avscripteditor.git AVScriptEditor
+git clone git@github.com:Compass-Classroom/AVScriptEditor.git
 ```
 
 Skill auto-registers in PAI on next session start.

@@ -1,6 +1,6 @@
 ---
 name: AVScriptEditor
-description: Editorial layer for Compass Classroom AV-script Google Sheets. Reads a per-course profile, walks the transcript, and writes per-row image briefs (concept + image type) into the NOTES column of a duplicate WORKING tab — then optionally dispatches to FindScienceMedia or FindArt for sourcing. USE WHEN edit AV script, av script editor, identify images for AV script, draft image briefs, apply course profile to script, compass av script, update profile from critique, avscripteditor.
+description: Editorial layer for Compass Classroom AV-script Google Sheets. Reads a per-course profile, walks the transcript, and writes per-row image briefs (concept + image type) into the NOTES column of a duplicate WORKING tab — then optionally dispatches to FindScienceMedia or FindArt for sourcing. USE WHEN edit AV script, AV script editor, AVScriptEditor, identify images for AV script, draft image briefs, apply course profile to script, compass av script, update profile from critique.
 ---
 
 # AVScriptEditor
