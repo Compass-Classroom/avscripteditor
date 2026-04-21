@@ -1,6 +1,6 @@
 ---
 name: AVScriptEditor
-description: Editorial layer for Compass Classroom AV-script Google Sheets. Reads a per-course profile, walks the transcript, and writes per-row image briefs (concept + image type) into the NOTES column of a duplicate WORKING tab — then optionally dispatches to FindScienceMedia or FindArt for sourcing. USE WHEN edit AV script, AV script editor, AVScriptEditor, identify images for AV script, draft image briefs, apply course profile to script, compass av script, update profile from critique.
+description: Editorial layer for Compass Classroom AV-script Google Sheets. Reads a per-course profile, walks the transcript, and writes per-row image briefs (concept + image type) into a dedicated BRIEF column of a duplicate WORKING tab — then optionally dispatches to FindScienceMedia or FindArt for sourcing. USE WHEN edit AV script, AV script editor, AVScriptEditor, identify images for AV script, draft image briefs, apply course profile to script, compass av script, update profile from critique.
 ---
 
 # AVScriptEditor
@@ -28,7 +28,7 @@ When this skill is invoked:
 
 ```
 Has the WORKING tab been created AND just need briefs written?
-+-- YES --> BriefOnly (safe default; editor writes NOTES only)
++-- YES --> BriefOnly (safe default; editor writes BRIEF column only)
 +-- NO  --> Sourcing needed too?
     +-- Briefs + live URLs/thumbs in new tab --> PopulateSheet (end-to-end)
     +-- Briefs already written, now source --> BriefAndSource
@@ -99,7 +99,8 @@ The profile is a living document. Treat it the way a DP treats a shot list: shar
 - **Sourcing is not this skill's job** — dispatches to FindScienceMedia (NASA/NOAA/USGS) and FindArt (Wikimedia/museums)
 - **Default mode is BriefOnly** — nothing gets sourced without explicit opt-in
 - **Profiles are living documents** — each reviewer critique updates the profile via `UpdateProfile`
-- **Sheet convention** (from the Astro Ch 1 working tab): duplicate Sheet1 → `Sheet1 (WORKING)`; column D = IMAGE concept, E = FILE NAME, F = NOTES (brief + source + license), H = `=IMAGE()` thumbnail, I = bare hi-res URL
+- **Sheet convention:** duplicate Sheet1 → `Sheet1 (WORKING)`; column D = IMAGE concept, E = FILE NAME, H = `=IMAGE()` thumbnail, I = bare hi-res URL, J = BRIEF (editorial brief + sourcing hint)
+- **NOTES (column F) is OFF-LIMITS to this skill** — F is reserved for human editor markers that flow downstream to Final Cut as timeline annotations. Never write briefs or source info to F.
 
 ## Sheet Column Map (shared across workflows)
 
@@ -110,10 +111,11 @@ The profile is a living document. Treat it the way a DP treats a shot list: shar
 | C | TEXT | source (do not edit) |
 | D | IMAGE | AVScriptEditor (concept description) |
 | E | FILE NAME | AVScriptEditor (on sourcing) |
-| F | NOTES | AVScriptEditor (brief + image type + sourcing hint + license) |
+| F | NOTES | **reserved** — human editor only (flows to Final Cut as timeline markers). AVScriptEditor NEVER writes here. |
 | G | SECTION | source (do not edit) |
 | H | THUMBNAIL | AVScriptEditor on sourcing (`=IMAGE()` formula) |
 | I | URL | AVScriptEditor on sourcing (bare hi-res URL) |
+| J | BRIEF | AVScriptEditor (editorial brief: `TYPE:<tag> \| <description> \| <sourcing hint>`; source + license appended on sourcing) |
 
 ## Related Skills
 

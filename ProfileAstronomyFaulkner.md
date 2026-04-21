@@ -100,7 +100,7 @@ Every brief written by AVScriptEditor includes a `TYPE:` tag so downstream workf
 | `cycle:N` | Multi-image concept cycle (e.g., `cycle:3` = three images shown in quick succession) | varies — specify per-slot |
 | `hold` | Intentionally reuse / hold prior image for this beat | (editor) |
 
-## Brief Format (what goes in NOTES column)
+## Brief Format (what goes in BRIEF column — J)
 
 ```
 TYPE:<tag> | <concrete visual description, 8-16 words> | <sourcing hint or specific subject keyword>

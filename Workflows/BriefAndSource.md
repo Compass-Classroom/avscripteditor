@@ -11,18 +11,18 @@ Runs `BriefOnly` first, then dispatches each brief to the right sourcing skill (
 
 - **Sheet URL**
 - **Profile slug**
-- **Row range** (optional — default = all rows with a brief in column F)
+- **Row range** (optional — default = all rows with a brief in column J)
 
 ## Preconditions
 
 - WORKING tab exists
-- Column F has briefs in the canonical format (`TYPE:<tag> | <description> | <hint>`)
+- Column J has briefs in the canonical format (`TYPE:<tag> | <description> | <hint>`)
 
 ## Procedure
 
 1. **Voice notification.**
 2. **Load profile** (for sourcing priorities and fallbacks).
-3. **Read briefs** from column F of the WORKING tab.
+3. **Read briefs** from column J of the WORKING tab.
 4. **Parse each brief** into `{tag, description, hint}`.
 5. **Dispatch by tag:**
     - `TYPE:science` → invoke `FindScienceMedia` (Tier 1: NASA/NOAA/USGS). Pass `description` + `hint` as the search.
@@ -35,7 +35,7 @@ Runs `BriefOnly` first, then dispatches each brief to the right sourcing skill (
 7. **Write to sheet** (WORKING tab only). Use `gws sheets spreadsheets values batchUpdate`:
     - Column D (IMAGE): short concept name
     - Column E (FILE NAME): `<nasa_id_or_source_id>_<slug>.jpg`
-    - Column F (NOTES): append source + license line to existing brief
+    - Column J (BRIEF): append source + license line to the existing brief (NEVER write to F)
     - Column H (THUMBNAIL): `=IMAGE("<medium_url>")` formula
     - Column I (URL): bare `~orig.jpg` or equivalent hi-res URL
 8. **Resize rows and columns** on WORKING tab: rows containing briefs → ~100px; column H → ~160px.
@@ -47,7 +47,8 @@ If `FindScienceMedia` returns nothing for a `TYPE:science` brief, try `FindArt` 
 
 ## Anti-patterns
 
-- Do NOT re-read the transcript — briefs in column F are the source of truth.
+- Do NOT re-read the transcript — briefs in column J are the source of truth.
+- Do NOT write to column F (NOTES) under any circumstances — it's human-editor / FCP marker space.
 - Do NOT second-guess the editor's tag — if `TYPE:historical`, do NOT silently substitute `TYPE:science` even if easier to source.
 - Do NOT mix licenses in a single brief without an explicit note in column F.
 - Do NOT write to Sheet1.
