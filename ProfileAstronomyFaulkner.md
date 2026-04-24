@@ -4,9 +4,9 @@ course: Astronomy (Compass Classroom, Danny Faulkner)
 instructor: Danny Faulkner
 editor: Ryan Stufflebeam
 audience: Classical Christian high school (homeschool + Trail Life context)
-version: 4
+version: 5
 last_updated: 2026-04-24
-source_of_truth: Ryan Stufflebeam's ch01-1 FCP-timeline review + editorial-principles conversation + adoption of Documentary Filmmakers' Best Practices in Fair Use (2005)
+source_of_truth: Ryan Stufflebeam's ch01-1 FCP-timeline review + editorial-principles conversation + adoption of Documentary Filmmakers' Best Practices in Fair Use (2005) + GalleryQuery Tier 0 integration
 test_sheet: <REDACTED-TEST-SHEET-ID>
 ---
 
@@ -305,6 +305,50 @@ When no suitable PD/CC imagery exists (e.g., Catastrophic Plate Tectonics diagra
 
 Prefer higher tiers when a valid match exists. Only drop to lower tiers when the beat genuinely requires it.
 
+## Tier 0 — Compass local galleries (GalleryQuery)
+
+**The first place to look.** Pre-cleared PD imagery curated by Compass and hosted on-prem (`10.1.10.198`). Zero licensing friction, fastest round-trip (sub-second FTS, ~10ms CLIP), and the content has already been vetted for our use — no per-item verification needed at pick time.
+
+Query via the `GalleryQuery` skill (`bens-skills/GalleryQuery/Tools/gallery_query.py`). Three modes: `fts` (known terms / artist names / iconographic categories), `clip` (natural-language visual briefs), `sql` (structured filters like year ranges, color palettes, medium). See `GalleryQuery/SKILL.md` for the full output contract.
+
+**Registered galleries:**
+
+| Name | Enabled | Content | Best for |
+|------|---------|---------|----------|
+| `paintings` | ✅ | 40,936 classical paintings, CLIP + FTS5 searchable, 100% AI-tagged (style/medium/colors/mood/description) | `TYPE:historical` biblical scenes, `TYPE:art` academic paintings, `TYPE:historical` portraits, allegorical works. Strong for Renaissance / Baroque / 19th-c. coverage. |
+| `science` | ❌ (future, ~4,000 curated PD images) | scientific imagery | Will cover much of `TYPE:science` and `TYPE:artifact` demand when it comes online. Query returns exit-4 while offline — sourcer silently moves on. |
+
+**Which mode to pick:**
+
+- **Brief names a specific subject, artist, or iconographic category** ("Annunciation", "Millet", "Passover seder") → `fts` first.
+- **Brief is a vibe / visual description** ("tense biblical scene, warm palette", "reverent altarpiece depicting creation", "19th-c. pastoral with farmers in sunlight") → `clip` first.
+- **Brief has structured constraints** (year ≤ 1700, specific medium, palette intersection) → `sql`.
+
+The two cheap modes (fts + clip) can both be tried without a meaningful cost penalty.
+
+**When to invoke Tier 0:**
+
+- Default first probe for `TYPE:art`, `TYPE:historical`, and (once the science gallery is online) `TYPE:artifact` + `TYPE:science` beats.
+- Any beat where a curated classical painting might land — Tier 0 has already done the licensing work, and the catalog size (40k+ paintings) is larger than any single museum we'd hit in Tier 1.
+
+**When to skip Tier 0:**
+
+- Brief is purpose-specific to a known external asset (e.g., "Bayer Uranometria plate 49" — that's Tier 1 Commons territory, not Tier 0).
+- Brief needs NASA / Hubble / JWST / ESO imagery — those are purpose-built Tier 1 sources. Don't round-trip to a local gallery first.
+- Brief is for very recent content (post-ingest cutoff). Empty result will waste the round-trip.
+
+**Fallback behavior:**
+
+Tier 0 misses are **silent** — no brief annotation, no `NOTE:` flag, no visible trace. A non-zero exit code (unreachable, bad input, disabled gallery) or an empty result array means "this beat wasn't in the local catalog," and the sourcer moves directly to Tier 1. Tier 0 is a speculative pre-check, not a committed tier.
+
+**Sanity check before a sourcing run:**
+
+```bash
+python3 GalleryQuery/Tools/gallery_query.py health --gallery paintings
+```
+
+If exit 0 and all four services (`datasette`, `clip_health`, `clip_ready`, `images`) report `ok: true`, the gallery is live. If unreachable from your network (e.g., working off-site), Tier 0 is silently skipped — no editorial impact, just less catalog coverage.
+
 ## Tier 1 — PD, scrapable via Commons API
 
 NASA Image & Video Library, APOD, Hubble, JWST (MAST), NOAA, USGS, NASA Earth Observatory, NASA SVS. Wikimedia Commons PD scans (Yorck Project, Google Art Project, NGA, Met Open Access, Rijksmuseum, Mauritshuis, BnF Gallica, British Library, Library of Congress).
@@ -381,4 +425,5 @@ Internet Archive hosts substantial collections relevant to our workflow. Per-ite
 - **v1 (2026-04-21)** — Incorporated Ryan's row-by-row critique of the full BriefOnly dry run (`Feedback/Ryans-Feedback-2026-04-21-1016.md`). Added 3 winning patterns (historical-lane continuity, subject + context pairing, zodiac-placement rule) and 1 forbidden move (zodiac leading a calendar beat). Density target intentionally unchanged — Ryan noted the over-coverage was tolerable and he wants more options in practice; revisit scheduled after a second pass (tracked in `ROADMAP.md`). Two architectural blockers from the same review were addressed in separate commits: BRIEF column (commit d69b6eb) and image-only scope narrowing (commit b70c300).
 - **v2 (2026-04-24)** — ch01-1 FCP-timeline review. Scientific beats landed; historical beats miscategorized as fine-art when the pedagogical point was the scientific *object* (star charts, diagrams, catalogs). Dichotomy beats (evolution-vs-gravity) briefed as single images when the contrast itself was the point. Added: **`TYPE:artifact`** as a fourth primary tag (scientific artifacts: star charts, celestial maps, astronomical diagrams, manuscript pages, period instruments). Added: **Dichotomy / comparison pattern** — always `TYPE:cycle:2` for A-vs-B beats. Added: **Read-ahead rule** — brief-writer reads next ~3 rows of AUDIO before committing, defaults to section-at-a-time walk. Two new Forbidden Moves (#10 portraits where artifact carries the point, #11 single image on dichotomy beats). New winning pattern (artifact-over-portrait, dichotomy-as-cycle). Subject-Specific Preferences matrix to codify the ch01-1 misses.
 - **v3 (2026-04-24)** — Editorial-principles conversation after the v2 fixes. Added five teacher/editor principles as a first-class section: (1) **narrative arc** (soft, multi-scale — sub-section / section / chapter; sub-section arcs are often the right granularity for technical content where section arcs fail); (2) **analogy vs identity** (analogy-signaling language means the image is the metaphor, not the referent); (3) **"Why this, why now?" forcing question** with optional `WHY:` brief field; (4) **brief-as-hypothesis `OR` alternatives** when multiple images serve equally well; (5) **cross-beat annotation layer** (`RHYMES-WITH:`, `SETS-UP:`, `CALLBACK-TO:`, `PAYS-OFF:`). Principles are guidance, not rigid; `TYPE:speaker` and course-level visual lexicon were considered and explicitly deferred.
+- **v5 (2026-04-24)** — Added **Tier 0 — Compass local galleries (GalleryQuery)** at the top of the Sourcing Location Hierarchy. Points at Ben's new `GalleryQuery` skill (`bens-skills/GalleryQuery`), a thin HTTP adapter over the on-prem paintings catalog on ccmini (40,936 classical paintings, CLIP + FTS5 + SQL) and the future science gallery (~4,000 curated images, offline until endpoints stabilize). Pre-cleared PD license posture — zero per-item verification needed. Tier 0 is the default first probe for `TYPE:art` and `TYPE:historical` beats (and will be for `TYPE:science` / `TYPE:artifact` once the science gallery comes online). Misses are silent — non-zero exit or empty result means "move to Tier 1," no brief annotation, no `NOTE:` flag. Sourcer should still skip Tier 0 for purpose-specific external assets (Bayer Uranometria, Commons-specific works) and for NASA / Hubble / JWST / ESO imagery where Tier 1 is purpose-built.
 - **v4 (2026-04-24)** — Adopted **full Documentary Filmmakers' Best Practices in Fair Use** (Center for Social Media, 2005) as **Tier 4** in the Sourcing Location Hierarchy. Three applicable classes: #1 critique, #2 illustration (broadest / most useful), #4 historical sequence. Added the `FAIR-USE: <class> | <rationale>` brief annotation as mandatory for Tier 4 picks. Added **archive.org** as a cross-cutting source (Tier 1/2/3/4 depending on per-item `licenseurl`) — specifically notable for 19th–20th c. astronomy book scans (goldmine for `TYPE:artifact`), NASA HQ press photography, Prelinger Archives. **Manual-download moved to Tier 5 (last resort)** from v1's implicit "tier 4" position — manual sourcing requires human-in-the-loop effort, so it should only be invoked when all scrapable/fair-use paths have been exhausted. Formalized the Sourcing Location Hierarchy as its own top-level section. Codified the per-course used-image registry (referenced earlier, now load-bearing) and technical sourcing rules (Commons API verification, browser UA, rate-limit handling, NASA SVS variant hunting).
