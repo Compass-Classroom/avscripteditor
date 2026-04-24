@@ -4,15 +4,15 @@ course: Astronomy (Compass Classroom, Danny Faulkner)
 instructor: Danny Faulkner
 editor: Ryan Stufflebeam
 audience: Classical Christian high school (homeschool + Trail Life context)
-version: 1
-last_updated: 2026-04-21
-source_of_truth: Ryan Stufflebeam's review of Chapter 1 test pass (first 2 min)
+version: 4
+last_updated: 2026-04-24
+source_of_truth: Ryan Stufflebeam's ch01-1 FCP-timeline review + editorial-principles conversation + adoption of Documentary Filmmakers' Best Practices in Fair Use (2005)
 test_sheet: <REDACTED-TEST-SHEET-ID>
 ---
 
 # Profile: Astronomy / Faulkner
 
-Editorial taste profile for Dr. Danny Faulkner's Astronomy course, edited by Ryan Stufflebeam. First seeded from Ryan's row-by-row critique of the Chapter 1 image test (WORKING tab of sheet `<REDACTED-TEST-SHEET-ID>`).
+Editorial taste profile for Dr. Danny Faulkner's Astronomy course, edited by Ryan Stufflebeam. First seeded from Ryan's row-by-row critique of the Chapter 1 image test (WORKING tab of sheet `<REDACTED-TEST-SHEET-ID>`), hardened across v2–v4 by a full-lecture sourcing pass on ch01-1 (31 min, ~38 briefed rows) and the resulting FCP timeline review.
 
 ## Editorial Voice
 
@@ -33,8 +33,9 @@ Explicit rule: a 30-second section should have **1–2 images**, not 5. Hold ima
 | Type | Target % | Typical sourcing |
 |------|---------|------------------|
 | NASA / NOAA / USGS science imagery | ~45% | FindScienceMedia |
-| Historical engravings, woodcuts, museum pieces | ~40% | FindArt |
-| Artistic illustration, paintings, maps | ~15% | FindArt |
+| Historical scientific artifacts (star charts, diagrams, catalogs) | ~25% | FindArt (`artifact`) |
+| Historical engravings / woodcuts / paintings of people | ~20% | FindArt (`historical`) |
+| Artistic illustration, paintings, maps | ~10% | FindArt (`art`) |
 
 Percentages are directional, not enforced — aesthetic fit to the beat wins. Text beats are out of scope (handled by a separate text-handler agent) and do not count in this distribution.
 
@@ -42,13 +43,15 @@ Percentages are directional, not enforced — aesthetic fit to the beat wins. Te
 
 | Beat signal | Primary sourcer | Fallback |
 |-------------|----------------|----------|
-| Cosmos, planets, stars, nebulae, deep space | FindScienceMedia | FindArt (historical astronomy art) |
-| Earth observation, weather, seasons from space | FindScienceMedia | — |
+| Cosmos, planets, stars, nebulae, deep space | FindScienceMedia (`science`) | FindArt (historical astronomy art) |
+| Earth observation, weather, seasons from space | FindScienceMedia (`science`) | — |
+| **Astronomical ideas, catalogs, star charts, historical diagrams** | **FindArt (`artifact`)** — Bayer, Hevelius, Kepler, Flamsteed, Ptolemaic plates | FindScienceMedia (NASA historical reproductions) |
 | Etymology, vocabulary, Greek/Latin words | **leave blank** (text agent territory) | FindArt (ONLY if the image clearly supports, not replaces, text) |
 | Scripture citation (book:chapter:verse) | **leave blank** (text agent territory) | — |
-| Ancient/historical figures, cultures, eras | FindArt | FindScienceMedia (only if literal object) |
+| Ancient/historical **people** doing science | FindArt (`historical`) | FindScienceMedia (only if literal object) |
 | Agriculture, daily life, diurnal human scenes | FindArt (paintings, etchings, photos) | FindScienceMedia (only if landscape scale works) |
 | Biblical scenes (Creation, Day 2, Day 4, Magi) | FindArt (historical religious art) OR cosmic Hubble/JWST imagery | — |
+| **A-vs-B contrast beats** ("like", "versus", "whereas") | **Always `TYPE:cycle:2`** — see Dichotomy pattern below | — |
 
 ## Forbidden Moves (anti-patterns from Ryan's critique)
 
@@ -57,10 +60,12 @@ Percentages are directional, not enforced — aesthetic fit to the beat wins. Te
 3. **More than 1 image per 30 seconds** — over-cutting; viewer can't absorb
 4. **Modern telescope photos for "arranging the stars" / cataloging concept** — the concept is *information arrangement*, not equipment
 5. **NASA deep-space image for "oldest of the sciences"** — this beat needs a historical engraving (Greek or medieval astronomers at work)
-6. **Space imagery for etymology beats** — Greek word roots should be on-screen text, optionally paired with a period-appropriate historical illustration
+6. **Space imagery for etymology beats** — Greek word roots should be text-only, optionally paired with a period-appropriate historical illustration
 7. **Cheesy stock-feel composites** — "family portrait of planets" clip-art aesthetic
 8. **Pretty-but-irrelevant imagery** — a gorgeous Hubble deep-field does not automatically support whatever the narrator is saying
 9. **Zodiac imagery leading a "calendar" beat** — a high-school viewer without archaeology/antiquities background reads the zodiac before the calendar, defeating the pedagogical point. Zodiac belongs in astrology-origins beats, not in calendar-marking-time beats.
+10. **Posed portraits where a scientific artifact carries the point** (v2) — when Faulkner names an astronomical idea, structure, or catalog, a portrait of the astronomer is weaker than the artifact itself. Default to `TYPE:artifact` in that case.
+11. **Single image on dichotomy beats** (v2) — when AUDIO sets up an A-vs-B contrast, a single image loses the argument. Always brief as `TYPE:cycle:2` with slot A + slot B.
 
 ## Text-Beat Signals (leave blank — NOT this skill's job)
 
@@ -82,6 +87,8 @@ These content types belong to the future text-handler agent. AVScriptEditor iden
 - **Historical-lane continuity across section transitions** (v1) — once a historical visual lane is established, preserve it for adjacent biblical/cosmic beats. Example: if the beats leading into "God created the heavens on day 2" are historical engravings of ancient astronomers, the Day-2 beat should stay in that lane (altarpiece, illuminated manuscript) rather than pivoting to a JWST nebula.
 - **Subject + context pairing** (v1) — when a beat names both an astronomical object AND a specific geography (e.g., Sirius over Egypt), the brief must put both in frame so the viewer connects them. The object alone is insufficient.
 - **Zodiac in astrology-origins beats, not calendar beats** (v1) — zodiac imagery reads as "astrology" to a high-school viewer. Use it where the instruction is about astrology's origins; keep it out of "calendar / marking time" beats (which need a calendar to read as a calendar first).
+- **Artifact over portrait when the point is the work** (v2) — Bayer Uranometria, Kepler diagrams, Tycho mural-quadrant engraving beat a portrait of the astronomer when the audio is about *what they produced*.
+- **Dichotomy as a cycle** (v2) — A-vs-B contrast beats ("disbelieving evolution is as bad as disbelieving gravity") need both sides on screen; single images consistently miss the argument.
 
 ## Losing Patterns (from Ryan's review — do not repeat)
 
@@ -91,6 +98,9 @@ These content types belong to the future text-handler agent. AVScriptEditor iden
 - Hubble deep-field for "oldest of the sciences" (I12) — pretty but needs a historical engraving
 - Satellite farm image for "everybody worked on the farm" (I27) — need an artistic/historical pairing
 - Equinox/solstice diagram for "track annual cycle to know when to plant" (I31) — the actual content in the next section is about Sirius + Nile flooding, not the equinoxes
+- **Medieval illuminated manuscript where specific detail must read (ch01-1 r78 Breviari d'Amour, r130 Paris Psalter)** — decorative but illegible at HS speed. Use when the illumination IS the point (zodiac wheel, liturgical context); skip when a specific event or detail must be parsed.
+- **Dark grayscale period painting for "19th-c. chemistry lab"** — a modern classroom with visible color + beakers beat the Wellcome oil paintings for HS readability. Readability > pedigree when the point is the *scene*, not the era.
+- **Allegorical Renaissance painting where concept is literal** — Veronese's *Allegory of Navigation with an Astrolabe* reads as "ornate allegory" before "astrolabe"; use Holbein's *Ambassadors* (instruments on a table, clearly recognizable scholars) instead.
 
 ## Image Type Tags (used in briefs)
 
@@ -98,29 +108,277 @@ Every brief written by AVScriptEditor includes a `TYPE:` tag so downstream workf
 
 | Tag | Meaning | Sourcer |
 |-----|---------|---------|
-| `science` | NASA/NOAA/USGS-style scientific imagery | FindScienceMedia |
-| `historical` | Engravings, woodcuts, old photographs, period paintings | FindArt |
+| `science` | NASA/NOAA/USGS-style modern scientific imagery (photos, simulations, observatory plates) | FindScienceMedia |
+| `artifact` | **Historical scientific artifacts** — star charts, celestial maps, astronomical diagrams, manuscript pages, period instruments. The *object of scientific work*, not *people doing it*. | FindArt (Bayer/Hevelius/Kepler/Flamsteed scans, BnF Gallica, Smithsonian instruments) + FindScienceMedia (historical NASA sky-chart reproductions) |
+| `historical` | Engravings, woodcuts, paintings of **people** doing science / historical scenes / period portraits | FindArt |
 | `art` | Fine art, illustration, non-historical artistic rendering | FindArt |
 | `cycle:N` | Multi-image concept cycle (e.g., `cycle:3` = three images shown in quick succession) | varies — specify per-slot |
 | `hold` | Intentionally reuse / hold prior image for this beat | (editor) |
 
-Note: `TYPE:text` was removed from this skill's tag set. Text-only beats get a blank BRIEF cell; the separate text-handler agent (future) will fill those.
+Note: `TYPE:text` was removed in v1. Text-only beats get a blank BRIEF cell; the separate text-handler agent (future) will fill those.
 
-## Brief Format (what goes in BRIEF column — J)
+### `artifact` vs `historical` — the distinction matters
+
+The ch01-1 review surfaced this: many beats tagged `TYPE:historical` really wanted `TYPE:artifact`. The key question: **is the pedagogical point the people or the object?**
+
+- "Astronomy is the oldest science. Astronomers have been arranging information about the sky for thousands of years." → pedagogical point is *the arranged information*. Brief as `TYPE:artifact` pointing at a Bayer Uranometria plate, a Ptolemaic zodiac diagram, a medieval star catalog page. NOT a painting of astronomers.
+- "Galileo used his telescope to revolutionize our view of the heavens." → pedagogical point is *Galileo as a person doing science*. Brief as `TYPE:historical` pointing at a portrait / engraving of Galileo with his instrument.
+- "Kepler worked out that orbits are ellipses." → either can work, but the *diagram* from Kepler's *Astronomia Nova* (artifact) is often stronger than a portrait of Kepler (historical).
+
+Default to `artifact` when the instructor names a scientific idea, structure, or catalog. Default to `historical` when the instructor names a person, era, or cultural context.
+
+## Brief Format (what goes in BRIEF column J)
 
 ```
 TYPE:<tag> | <concrete visual description, 8-16 words> | <sourcing hint or specific subject keyword>
 ```
 
+Optional annotation fields (see **Editorial Principles (v3)** below for usage):
+- `WHY:` — one-sentence "why this, why now" rationale for hard beats
+- `OR |` — alternative image, when multiple picks serve equally well
+- `RHYMES-WITH: r<row>` / `SETS-UP: r<row>` / `CALLBACK-TO: r<row>` / `PAYS-OFF: r<row>` — cross-beat linkage annotations
+- `FAIR-USE: <class> | <rationale>` — required on Tier 4 fair-use picks (see **Sourcing Location Hierarchy** below)
+
 Examples:
 ```
+TYPE:artifact | Bayer Uranometria plate showing an organized star catalog | FindArt: "Bayer Uranometria constellation plate"
 TYPE:historical | 18th-c. engraving of Greek astronomers at work | FindArt: "ancient Greek astronomers engraving"
 TYPE:science | Hubble/JWST nebula evoking cosmic creation | FindScienceMedia: "Pillars of Creation"
 TYPE:cycle:3 | Sun → Moon → starfield, 2 sec each | slot 1: sun disk; slot 2: crescent moon; slot 3: starfield
+TYPE:cycle:2 | Dichotomy — evolution (A) vs gravity (B) as ongoing sciences | slot 1: ape-to-man diagram (science); slot 2: LIGO or space-time curvature (science)
 TYPE:hold | keep prior image on screen
 ```
+
+---
+
+# Editorial Principles (v3)
+
+Teacher/editor moves that lift the brief-writer from row-local pattern-matcher toward narrative-aware editorial judgment. Principles are guidance, not mandates — when a section's structure doesn't support a principle (e.g., pure enumeration where no arc exists), don't force it.
+
+## 1. Narrative arc (soft, multi-scale)
+
+When a stretch of rows **traces a progression** — historical development, argument building, scaffold of an idea, introduce → define → example → implication — the brief sequence across that stretch should honor the arc. First image **orients**, middle images **build**, last image **resolves or pivots**.
+
+Arcs exist at three scales. The brief-writer should look for whichever scale actually applies, not force the section-wide one.
+
+### Sub-section / beat cluster (3–5 rows, ~30–60s)
+
+The most reliable arc. A single point developed over a few adjacent rows: introduce concept → define term → example → implication. Happens in **technical content even when the section-level arc fails**. For technical chapters (ch03+), this is usually the right granularity.
+
+**Detection signals:** local connectives in AUDIO — "first… second… finally," "let me explain… for example… so what this tells us," "on one hand… on the other," "and that's why," "so here's the thing."
+
+### Section-level (5–15 briefed rows, 3–7 min)
+
+AstronomyScript-assigned section boundary. Strong in historical / argumentative sections.
+
+**Detection signal:** section's first data row and last data row describe **different times or different stages of an argument** → arc applies. If the section is pure enumeration (list of planets, properties, types), treat as parallel structure — **no arc**.
+
+### Chapter-level (entire lecture)
+
+Bookends: first section orients the whole lecture, last section resolves or pivots to the next lecture. This is where `PAYS-OFF:` and `CALLBACK-TO:` annotations earn their keep.
+
+**Detection signal:** compare section headings taken in sequence — do they trace a progression?
+
+### Worked examples
+
+- **Section-level (ch01-1 "Oldest Science"):** Bayer Uranometria → Tycho at his quadrant → Wright of Derby *Orrery* traces *antiquity → early modern observation → Enlightenment demonstration*. A random reshuffling weakens the section even though the picks are unchanged.
+- **Sub-section-level (hypothetical ch03 "Types of stars"):** the section enumerates star classes (no section-level arc), but within each class: a composition diagram (introduce) → an H-R diagram position (define) → a named exemplar photo (example) → a late-stage evolution image (implication). Four-beat sub-section arc.
+
+### The "don't force it" clause
+
+**Better to skip the arc than to force a phony one.** If neither sub-section nor section signals are present, treat the rows as parallel and brief them independently. Forcing a narrative on enumerated content produces worse briefs than acknowledging the enumeration.
+
+**Workflow implication:** after writing briefs across a cluster or section, re-read the briefs **as a sequence** before committing. Do they honor a progression? If yes, good — reorder or rewrite to strengthen. If no (parallel / enumeration / single concept), move on without forcing.
+
+## 2. Analogy vs identity
+
+When AUDIO uses analogy-signaling language, the image is the **analogy**, not the literal referent.
+
+**Signal phrases:** "like", "imagine", "think of it as", "similar to", "picture", "just as X, so Y", "it's kind of a…", "you can think of this as…"
+
+**Worked examples:**
+- "Gravity is like a ball on a rubber sheet" → image is the **rubber-sheet space-time diagram**, not a literal ball or Earth.
+- "Astronomers are *arranging* information like librarians cataloging books" → image is a **librarian cataloging scene** or a **card-catalog grid**, not more astronomers.
+- "The universe is *older* than we can imagine — if you compressed its age into one year, humans appear on December 31st" → image is a **calendar / cosmic-clock** visualization, not a human.
+
+When the analogy is the point, `TYPE:artifact` for historical analogies or `TYPE:science` for modern visualizations. Rarely `TYPE:historical` — analogies aren't *about* people.
+
+## 3. "Why this, why now?" — forcing-function question
+
+Every brief must answer one sentence: **why this specific image at this specific beat?**
+
+- ❌ Weak answer: "Because the AUDIO says the word 'star.'" (Keyword matching — rewrite.)
+- ❌ Weak answer: "It's a pretty picture of the concept." (Generic illustration — rewrite.)
+- ✅ Strong answer: "Rhymes with the Bayer plate at r7 and sets up Tycho's observational work in r11 — this beat is *about the growing catalog of celestial knowledge*, not just 'stars.'"
+- ✅ Strong answer: "Faulkner is transitioning from scriptural authority (prior section) to natural observation (next section) — this image is the hinge; an illuminated manuscript with astronomy marginalia bridges both."
+
+**Application:** the brief-writer should be able to articulate a "why now" answer for every image brief. For **hard beats** (pivots, dichotomies, analogies, section heads, test-concept flags), include the answer in the brief itself as an optional `WHY:` field.
+
+If you can't write a "why now" sentence that goes past keyword-matching, the brief is weak — rewrite or mark the row as `TYPE:hold`.
+
+## 4. Brief as hypothesis (OR alternatives)
+
+When **multiple images could serve the same beat equally well**, list both with `OR`. Gives the sourcer room to pick by actual availability and quality.
+
+Format:
+```
+TYPE:artifact | Bayer Uranometria plate — organized star catalog | FindArt: "Bayer Uranometria plate" | OR | Kepler Astronomia Nova diagram | FindArt: "Kepler Astronomia Nova figures"
+```
+
+**When to use alternatives:** both options carry the same meaning with equal pedagogical force; neither option has a clear tier advantage; the sourcer's judgment on "what's actually available at textbook quality" is better than the brief-writer's remote guess.
+
+**When NOT to use alternatives:** one option is clearly stronger editorially (just pick it); the options have different meanings (that's two briefs, not one); on `TYPE:cycle:N` beats (use the cycle slots).
+
+## 5. Cross-beat awareness (annotation layer)
+
+Brief can carry optional linkage fields documenting editorial relationships between rows. No pipeline action required yet; these are **annotations for QC audit and future callback-aware logic**.
+
+Supported fields:
+- `RHYMES-WITH: r<row>` — this image is aesthetically/thematically paired with another beat's image
+- `SETS-UP: r<row>` — this image prepares the viewer for a concept revealed later
+- `CALLBACK-TO: r<row>` — this image intentionally echoes an earlier established image (motif reuse)
+- `PAYS-OFF: r<row>` — this image resolves a scaffold started at an earlier row
+- `FAIR-USE: <class-1|class-2|class-4> | <one-sentence rationale>` — declares Tier 4 fair-use invocation under a documented class. Required on all Tier 4 picks. See **Sourcing Location Hierarchy → Tier 4** below.
+
+Multiple annotations can stack: `RHYMES-WITH: r48 | SETS-UP: r130`. Cheap to write, compounding value for QC audit and future callback-aware sourcing.
+
+---
+
+# Sourcing Criteria (v2+)
+
+These rules govern how an image is *picked*, not what concept is briefed. Enforced by FindScienceMedia / FindArt / any sourcer writing filenames + URLs into the sheet.
+
+## Resolution & Format Floor
+
+- **Long edge ≥ 2000px** for any still image. Below that only if the image is genuinely iconic and no higher-res exists (e.g., Robert Hannah's Newton-at-Woolsthorpe painting — 1200×880 PD, but it's literally Newton + apple 1665 and nothing else matches). Flag sub-floor picks.
+- **Straight museum/archive scans > photos-of-paintings.** Perspective skew, visible frames, or uneven lighting = rework. Hunt the Google Art Project, NGA, Met, or Rijksmuseum scan of the same work.
+- **No AI-upscaled reproductions.** They read as plasticky even at HS audience scale (Bertini Galileo fresco was rejected on this ground).
+- **Videos (.webm, .mp4) are first-class.** NASA SVS, LIGO simulations, NASA SDO. Prefer the plain / unlabeled variant when multiple exist.
+- **Readability over pedigree.** A dark grayscale Wellcome oil painting of an alchemist with beakers reads worse to HS students than a modern photo of a chemistry classroom. The historical nature is secondary; the point is the viewer understanding what's being shown.
+
+## Fair Use for Commentary on a Named Person or Place (v1; generalized in v4 — see Tier 4)
+
+When the script is **commenting on a specific person or place** (discussing their ideas, career, legacy, or a specific site's significance), fair-use doctrine lets us run their image even if it's not formally PD/CC. v4 widened this to the full Documentary Filmmakers' Best Practices framework — see **Tier 4 — Fair Use** in the Sourcing Location Hierarchy below.
+
+## Tone & Content Calibration (HS Classical Christian Audience)
+
+- **No graphic violence.** Goya's *Saturn Devouring His Son* is iconic but disqualified — too dark for the homeschool context even in an astrology/pagan-mythology beat.
+- **No gratuitous nudity.** Canonical nude Renaissance works (Botticelli *Birth of Venus*, Ingres *Jupiter and Antiope* seduction scenes, Goltzius *Mercury*) are rejected even when they fit the brief thematically. Classical sculpture nudity is case-by-case; lean restrained.
+- **Biblical scenes: prefer narratively clear 19th-c. academic or High Renaissance over graphic medieval.** Tissot OT watercolors are the ideal (but see manual-source note — they don't exist at usable res on Commons). Good substitutes: Gustave Doré's 1866 Bible engravings, Cranach *Christ Blessing the Children*, Leonardo *Last Supper*.
+- **Passion / crucifixion imagery**: prefer Italian Renaissance (Mantegna, Raphael) to graphic Northern works (Grünewald's Isenheim Altar is too raw/bloody for this audience).
+
+## Subject-Specific Preferences (ch01-1 lessons)
+
+| Brief subject | Good pattern | Avoid |
+|---|---|---|
+| Ancient astronomer (person-focused) | `TYPE:historical` — Tycho at his mural quadrant, Hevelius + Elisabetha at sextant, Raphael *School of Athens*, Wright of Derby *Orrery* | Posed portraits without instruments, pure astrolabe-object photos, allegorical works (Veronese *Allegory of Navigation*) |
+| "Arranging information" / astronomical catalogs / idea of astronomy as organized science | **`TYPE:artifact`** — Bayer *Uranometria* plates, Hevelius *Firmamentum* charts, Kepler *Astronomia Nova* diagrams, Flamsteed atlas plates, Cellarius zodiac plates, Ptolemaic diagrams, medieval celestial manuscripts | Portraits of astronomers when the point is the *work* not the *worker* |
+| Historical science in action | Mary Anning at Lyme Regis, dinosaur excavation photos, Teniers/Wright alchemists, Faraday at Royal Institution, Liebig's Giessen lab | Bertillon mugshot grids (read as "two portraits"), heavily-cluttered 19th-c. lab engravings |
+| Chemistry lab | Modern classroom with visible glassware + color (Baldwin Academy Chemistry Lab), chemical-garden reaction close-up, scientist pouring blue liquid | Dark period paintings where the beakers blend into shadow |
+| Seasonal / time-of-year | Literal pastoral with season legible — Brueghel *Harvesters*, Millet *Gleaners* / *Sower*, Alma-Tadema *Spring* | Almanac cover pages (too text-heavy), abstract calendar art |
+| Star map / zodiac | Bayer Uranometria plates, Flamsteed atlas, Sidney Hall *Urania's Mirror* cards | Small medieval illumination zodiacs (Breviari d'Amour is readable but <2000px; keep only if nothing better exists) |
+| Cosmic-scale beat | Hubble Pillars of Creation, Hubble Ultra Deep Field, IllustrisTNG cosmic web simulation | Random Hubble "pretty picture" without iconic recognition value |
+| Biblical illuminated manuscript | Drop when possible — HS students don't parse medieval illumination at speed. Move to text-agent territory (leave blank) or `TYPE:hold` | Forli Siddur, Paris Psalter, generic illuminated pages |
+| Observatory dome | ESO La Silla / Kitt Peak / Mauna Kea night shots with domes visible + stars | Daytime dome shots, empty observatory interiors |
+
+## Repeat-Avoidance (Used-Image Registry)
+
+**Rule:** Don't reuse the same image within a chapter set of lectures unless the lecturer explicitly calls out the same reference twice.
+
+**Registry file:** `~/.claude/skills/avscripteditor/registry/astronomy-faulkner-used.json`
+
+Canonical per-course ledger recording every sourced FILE NAME + URL across every lecture, exploded per slot for cycle entries. Bootstrap from sheet state with `scripts/backfill_registry.py`; query with `scripts/check_registry.py`; auto-updated by `apply_sourcing.py` on every successful run.
+
+**Usage in the sourcing workflow:** before finalizing a pick, run
+```bash
+python3 scripts/check_registry.py --course-slug astronomy-faulkner --url "<candidate-url>"
+```
+Exit 0 = already used; exit 1 = clean; exit 2 = no registry.
+
+## Manual-Source hints
+
+When no suitable PD/CC imagery exists (e.g., Catastrophic Plate Tectonics diagrams owned by AiG/ICR, personal photos of the instructor), and the pick can't be claimed as Tier 4 fair use, carry a `MANUAL-SOURCE:` hint in the brief itself so the sourcer drops a placeholder and flags the row for human follow-up. **Do not write editorial NOTE markers to column F** — that column is reserved for human editor markers that flow downstream to Final Cut as timeline annotations. The manual-source flag lives in the brief (column J) where the sourcer can act on it.
+
+---
+
+# Sourcing Location Hierarchy
+
+Prefer higher tiers when a valid match exists. Only drop to lower tiers when the beat genuinely requires it.
+
+## Tier 1 — PD, scrapable via Commons API
+
+NASA Image & Video Library, APOD, Hubble, JWST (MAST), NOAA, USGS, NASA Earth Observatory, NASA SVS. Wikimedia Commons PD scans (Yorck Project, Google Art Project, NGA, Met Open Access, Rijksmuseum, Mauritshuis, BnF Gallica, British Library, Library of Congress).
+
+## Tier 2 — CC BY, scrapable
+
+Wellcome Collection, ESO, Biodiversity Heritage Library, Europeana, NASA ISS Expedition photo releases (frequently PD-USGov-NASA, occasionally CC). Cleveland Museum of Art, Paris Musées.
+
+## Tier 3 — CC BY-SA, acceptable with attribution
+
+Individual Commons photographers (Giles Laurent for Milky Way work, Uroš Novina for twilight sky), observatory astrophotography. Acceptable but requires LICENSE line with attribution.
+
+## Tier 4 — Fair Use (copyrighted material, transformatively quoted)
+
+Per the *Documentary Filmmakers' Statement of Best Practices in Fair Use* (Center for Social Media / American University, 2005), educational documentary work has standing to quote copyrighted material under three of the four documented classes. Compass Classroom is an identified educational publisher making transformative, bounded use — the four-factor test favors us.
+
+**The three applicable classes:**
+
+- **Class #1 — Critique.** Copyrighted material used as the *object* of commentary. Faulkner critiquing Sagan's naturalism → editorial Sagan portraits. Faulkner discussing evolution as a rival worldview → contemporary evolutionary-biology imagery. Faulkner commenting on alchemy/phlogiston → illustrations of those ideas being critiqued.
+- **Class #2 — Illustration.** Copyrighted material quoted to illustrate an argument Faulkner is developing. **The broadest and most useful class.** Opens: publisher textbook figures (HR diagrams, space-time curvature, ape-to-man), editorial photography, modern science visualizations, YouTube/PBS/Veritasium frames when quoting established explainer styles.
+- **Class #4 — Historical sequence.** Irreplaceable archival material for historical context when licensing is unavailable or prohibitive. Opens: Getty Images editorial archive, Life / National Geographic archives, Bettmann/Corbis historic photos, AiG/ICR proprietary YEC diagrams (Catastrophic Plate Tectonics, flood geology).
+
+Class #3 (incidental capture) does not apply — we're not shooting verité.
+
+**Decision order (when to invoke fair use):**
+
+1. Tier 1–3 search completed, no PD/CC equivalent at textbook quality → proceed
+2. Identify the class: object of critique → #1; illustrating an argument → #2; irreplaceable historical material → #4.
+3. Pass the transformativeness test: is our use for a *different purpose* than the original? (Educational illustration vs. original commercial/news/marketing use → yes.)
+4. Pass the amount test: we use the whole image but only for the 10-second beat. Bounded. OK.
+5. Pass the "range of sources" test: if we're about to lean disproportionately on one publisher/photographer, diversify.
+6. Annotate the brief: **`FAIR-USE: <class> | <one-sentence rationale>`**.
+7. License string identifies the source as fully as possible: publisher, photographer, archive, original publication date.
+8. Production-side: fair-use items get **prominent credit** in the lecture's end credits (not just metadata).
+
+**Limitations enforced per class:**
+
+- All classes: proper attribution; amount ≤ what's needed to make the point; not used merely to avoid the cost of shooting equivalent footage.
+- Class #2 specifically: quotations drawn from a **range of sources** across a lecture; no single publisher/photographer dominates.
+- Class #4 specifically: the project is not designed around the copyrighted material; the material has a critical illustrative function with no suitable substitute; licensing genuinely unavailable or prohibitive relative to a reasonable budget.
+
+## Tier 5 — Manual download only (scrape-blocked, JS-rendered, or licensed)
+
+**Last resort.** Requires human-in-the-loop effort, so it should only be invoked when no Tier 1–4 path works. Jewish Museum NYC collection (Tissot OT series hi-res), WikiArt (anti-scrape), Google Arts & Culture (when the originating museum isn't an API partner). Plan: user acquires manually in a browser, drops the file into the local media folder, sourcer writes FILE NAME/URL manually or flags with `MANUAL-SOURCE:` in the brief.
+
+## Archive.org as a cross-cutting source (Tier 1/2/3/4 depending on item license)
+
+Internet Archive hosts substantial collections relevant to our workflow. Per-item licenses vary — the sourcer reads the `licenseurl` metadata field and places the item in the appropriate tier:
+
+- **NASA HQ press photography** (`nasahqphoto-*` identifiers) — PD US gov works → **Tier 1**
+- **Prelinger Archives** — ephemeral / educational / historical film, mostly CC0 → **Tier 1/2**
+- **19th–20th c. astronomy book scans** (Flammarion, Proctor, Humboldt, etc.) — often PD by age, high-quality figure plates extractable → **Tier 1** for `TYPE:artifact` beats (goldmine for historical scientific artifacts not on Commons)
+- **Smithsonian contributed items** — typically CC0 → **Tier 1**
+- **Everything with `licenseurl` starting `creativecommons.org/publicdomain/zero/`** → **Tier 1**
+- **`creativecommons.org/licenses/by/`** → **Tier 2**
+- **`creativecommons.org/licenses/by-sa/`** → **Tier 3**
+- **No license tag or explicit copyright** → evaluate under **Tier 4 fair use** with class + rationale
+
+**API probe pattern:** `curl "https://archive.org/advancedsearch.php?q=<query>&fl[]=identifier&fl[]=title&fl[]=licenseurl&fl[]=mediatype&rows=<N>&output=json"`. Returns `licenseurl` for license-tier classification. Items fetch via `https://archive.org/download/<identifier>/<filename>`.
+
+## Technical Sourcing Rules
+
+- **Verify URLs via the Commons API. Never construct paths by hash guess.** `curl -sS "https://commons.wikimedia.org/w/api.php?action=query&titles=File:<URLencoded>&prop=imageinfo&iiprop=url|size&format=json"` returns the canonical upload.wikimedia.org URL. Claude will hallucinate the hash-prefix folder (`4/42/` vs `8/85/`); the API won't.
+- **Use a browser User-Agent** for downloads from upload.wikimedia.org. Wikimedia aggressively rate-limits UA strings that read like scrapers (`Mozilla/5.0 (Macintosh; Intel Mac OS X 14) AppleWebKit/605 Safari/17` works).
+- **Rate-limit handling**: if a single URL returns repeated 429 with cache-id `0c640b1`, the edge node has blacklisted that path for the session. Fall back to manual `curl` (often hits a different edge) or skip and re-run later.
+- **Fetch originals**: `~orig.jpg` for NASA, full-res upload.wikimedia.org for Commons. Don't fetch `/thumb/`.
+- **NASA SVS variant hunting**: annual releases (e.g., "Moon Phase and Libration 2026" SVS5587) publish fancy (with labels), plain (no labels), north-up / south-up, horizontal 2160p / vertical 1920p variants. Pull the horizontal plain 2160p by default.
+
+---
 
 ## Profile Evolution Log
 
 - **v0 (2026-04-20)** — Initial seed from Ryan Stufflebeam's review of Chapter 1 test (first 2 min, sheet `<REDACTED-TEST-SHEET-ID>`). All forbidden moves + winning/losing patterns derive from that review.
 - **v1 (2026-04-21)** — Incorporated Ryan's row-by-row critique of the full BriefOnly dry run (`Feedback/Ryans-Feedback-2026-04-21-1016.md`). Added 3 winning patterns (historical-lane continuity, subject + context pairing, zodiac-placement rule) and 1 forbidden move (zodiac leading a calendar beat). Density target intentionally unchanged — Ryan noted the over-coverage was tolerable and he wants more options in practice; revisit scheduled after a second pass (tracked in `ROADMAP.md`). Two architectural blockers from the same review were addressed in separate commits: BRIEF column (commit d69b6eb) and image-only scope narrowing (commit b70c300).
+- **v2 (2026-04-24)** — ch01-1 FCP-timeline review. Scientific beats landed; historical beats miscategorized as fine-art when the pedagogical point was the scientific *object* (star charts, diagrams, catalogs). Dichotomy beats (evolution-vs-gravity) briefed as single images when the contrast itself was the point. Added: **`TYPE:artifact`** as a fourth primary tag (scientific artifacts: star charts, celestial maps, astronomical diagrams, manuscript pages, period instruments). Added: **Dichotomy / comparison pattern** — always `TYPE:cycle:2` for A-vs-B beats. Added: **Read-ahead rule** — brief-writer reads next ~3 rows of AUDIO before committing, defaults to section-at-a-time walk. Two new Forbidden Moves (#10 portraits where artifact carries the point, #11 single image on dichotomy beats). New winning pattern (artifact-over-portrait, dichotomy-as-cycle). Subject-Specific Preferences matrix to codify the ch01-1 misses.
+- **v3 (2026-04-24)** — Editorial-principles conversation after the v2 fixes. Added five teacher/editor principles as a first-class section: (1) **narrative arc** (soft, multi-scale — sub-section / section / chapter; sub-section arcs are often the right granularity for technical content where section arcs fail); (2) **analogy vs identity** (analogy-signaling language means the image is the metaphor, not the referent); (3) **"Why this, why now?" forcing question** with optional `WHY:` brief field; (4) **brief-as-hypothesis `OR` alternatives** when multiple images serve equally well; (5) **cross-beat annotation layer** (`RHYMES-WITH:`, `SETS-UP:`, `CALLBACK-TO:`, `PAYS-OFF:`). Principles are guidance, not rigid; `TYPE:speaker` and course-level visual lexicon were considered and explicitly deferred.
+- **v4 (2026-04-24)** — Adopted **full Documentary Filmmakers' Best Practices in Fair Use** (Center for Social Media, 2005) as **Tier 4** in the Sourcing Location Hierarchy. Three applicable classes: #1 critique, #2 illustration (broadest / most useful), #4 historical sequence. Added the `FAIR-USE: <class> | <rationale>` brief annotation as mandatory for Tier 4 picks. Added **archive.org** as a cross-cutting source (Tier 1/2/3/4 depending on per-item `licenseurl`) — specifically notable for 19th–20th c. astronomy book scans (goldmine for `TYPE:artifact`), NASA HQ press photography, Prelinger Archives. **Manual-download moved to Tier 5 (last resort)** from v1's implicit "tier 4" position — manual sourcing requires human-in-the-loop effort, so it should only be invoked when all scrapable/fair-use paths have been exhausted. Formalized the Sourcing Location Hierarchy as its own top-level section. Codified the per-course used-image registry (referenced earlier, now load-bearing) and technical sourcing rules (Commons API verification, browser UA, rate-limit handling, NASA SVS variant hunting).
