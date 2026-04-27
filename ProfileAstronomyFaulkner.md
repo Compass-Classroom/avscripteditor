@@ -4,9 +4,9 @@ course: Astronomy (Compass Classroom, Danny Faulkner)
 instructor: Danny Faulkner
 editor: Ryan Stufflebeam
 audience: Classical Christian high school (homeschool + Trail Life context)
-version: 5
-last_updated: 2026-04-24
-source_of_truth: Ryan Stufflebeam's ch01-1 FCP-timeline review + editorial-principles conversation + adoption of Documentary Filmmakers' Best Practices in Fair Use (2005) + GalleryQuery Tier 0 integration
+version: 6
+last_updated: 2026-04-26
+source_of_truth: Ryan Stufflebeam's ch01-1 v1+v5 sourcing reviews — six durable sourcing rules codified after pattern-matching on recurring back-and-forths
 test_sheet: <REDACTED-TEST-SHEET-ID>
 ---
 
@@ -239,6 +239,7 @@ Supported fields:
 - `CALLBACK-TO: r<row>` — this image intentionally echoes an earlier established image (motif reuse)
 - `PAYS-OFF: r<row>` — this image resolves a scaffold started at an earlier row
 - `FAIR-USE: <class-1|class-2|class-4> | <one-sentence rationale>` — declares Tier 4 fair-use invocation under a documented class. Required on all Tier 4 picks. See **Sourcing Location Hierarchy → Tier 4** below.
+- `VERIFY: <what to verify>` — flags ambiguous filename patterns where Commons metadata can't be trusted (numbered files, plate numbers, folio refs, numeric IDs). QC reviewer eyeballs the file in Drive and clears the annotation. See **Sourcing Criteria → File-Content Verification** below.
 
 Multiple annotations can stack: `RHYMES-WITH: r48 | SETS-UP: r130`. Cheap to write, compounding value for QC audit and future callback-aware sourcing.
 
@@ -250,11 +251,51 @@ These rules govern how an image is *picked*, not what concept is briefed. Enforc
 
 ## Resolution & Format Floor
 
-- **Long edge ≥ 2000px** for any still image. Below that only if the image is genuinely iconic and no higher-res exists (e.g., Robert Hannah's Newton-at-Woolsthorpe painting — 1200×880 PD, but it's literally Newton + apple 1665 and nothing else matches). Flag sub-floor picks.
-- **Straight museum/archive scans > photos-of-paintings.** Perspective skew, visible frames, or uneven lighting = rework. Hunt the Google Art Project, NGA, Met, or Rijksmuseum scan of the same work.
+- **Width ≥ 2000px is the floor; 4000px+ width preferred for 4K-ready editing.** Width is what determines screen real estate at 16:9 timeline use — a 2400-tall portrait at 1500 wide fails this floor regardless of total pixel count. For sub-2000-width picks: only acceptable if the image is genuinely iconic and no higher-res exists (e.g., Robert Hannah's Newton-at-Woolsthorpe — 1200×880, literal Newton + apple 1665 and nothing else matches). Flag sub-floor picks.
 - **No AI-upscaled reproductions.** They read as plasticky even at HS audience scale (Bertini Galileo fresco was rejected on this ground).
 - **Videos (.webm, .mp4) are first-class.** NASA SVS, LIGO simulations, NASA SDO. Prefer the plain / unlabeled variant when multiple exist.
-- **Readability over pedigree.** A dark grayscale Wellcome oil painting of an alchemist with beakers reads worse to HS students than a modern photo of a chemistry classroom. The historical nature is secondary; the point is the viewer understanding what's being shown.
+
+## Aspect Ratio for Video Editing
+
+Landscape orientation (width > height) is preferred but historically often unavailable — many canonical paintings are vertical. When only a portrait pick exists, accept it; the editor frames ken-burns / partial-fill / 9:16-letterbox at edit time. NASA / observatory imagery is naturally 16:9 — default to landscape there. No explicit aspect annotation needed in the brief; the editor figures it out from looking at the file.
+
+## Planar Reproduction Over Installation Photo
+
+For paintings, manuscripts, and 2D artifacts, prefer **flat digital scans** (Google Art Project, Met Open Access, NGA, Rijksmuseum, BnF Gallica, museum digital archives) over **installation photos** taken at the museum. **Visible frames, perspective foreshortening, museum interior context, or angled reproductions = reject** and find the planar version.
+
+Worked examples (recurring in v1+v5):
+- Brueghel *The Harvesters* — the "with frame" / Met-installation photo gets rejected; the Google Art Project straight scan (`The_Harvesters.jpg` at `/wikipedia/commons/1/13/`) is the right pick.
+- Dendera Zodiac Louvre wall photo (angled, rejected) → planar Description-de-l'Égypte-style reproduction (`Ancient Egypt Zodiac of Dendera (28306172802).jpg`, accepted).
+
+## HS Legibility — the "2-second rule"
+
+If a HS student wouldn't recognize what the image shows in 2 seconds, the pick fails. **Applies to `TYPE:historical`, `TYPE:artifact`, `TYPE:art`** — anything used as b-roll support for a concept Faulkner names but doesn't walk through.
+
+**Exception — image-as-subject:** when AUDIO explicitly narrates the image's contents ("notice how X works… this part shows Y… here you can see…"), the legibility rule relaxes. Faulkner is doing the explaining; complex diagrams hold up because the voiceover is the reader. Future canonical example: ch04+ Hertzsprung-Russell diagram, where Faulkner spends minutes walking through stellar evolution — the H-R diagram is unintelligible to most HS viewers cold but works because Faulkner narrates it.
+
+**Heuristic to apply at sourcing time:** scan AUDIO for the next ~30 seconds after the image appears. If the AUDIO explicitly describes parts of the image, legibility is relaxed. If the AUDIO names a concept and moves on, legibility is enforced.
+
+Common 2-second-rule rejections from v1+v5: Veronese *Allegory of Navigation with Astrolabe* (allegorical figures don't read as astronomy), Hevelius *Tabula Selenographica* (lunar map mistakenly looks like an abstract circle), AI-upscaled Bertini fresco, small medieval illuminations where details don't read at TV size, alchemy 1922 stippled engraving.
+
+**Readability over pedigree.** A dark grayscale Wellcome alchemist oil painting reads worse to HS students than a modern photo of a chemistry classroom. The historical nature is secondary; the point is the viewer understanding what's being shown.
+
+## Default to 3 OR Alternatives for Non-Science Picks
+
+Single picks for `TYPE:art`, `TYPE:historical`, `TYPE:artifact` are the wrong default — art availability is variable, museum scan quality varies, and the editor benefits from picking based on actual file content. **Default to 3 OR alternatives** for these tags. The sourcing JSON uses the cycle `filenames`/`source_urls` list pattern; the editor selects one in FCP.
+
+**Single picks are fine for `TYPE:science`** — when NASA Pillars or NASA SVS Moon Phase 2026 plain webm is the canonical answer, one pick is right.
+
+**Cycles (`TYPE:cycle:N`) opt out** of the 3-options rule — those are conceptually deterministic (Day-4 sun → moon → stars). One canonical asset per slot. If a cycle slot turns out wrong, Ryan flags it specifically and we swap that slot.
+
+## File-Content Verification (`VERIFY:` Annotation)
+
+Commons file descriptions are sometimes misleading — a numbered file ("Giotto di Bondone 006.jpg") may not actually be the panel its title claims. When the source URL has an **ambiguous filename pattern** (numbered without explicit subject; "Plate XXIV"; "Folio 74r"; numeric IDs like "26358"), append a **`VERIFY:`** annotation to the brief in column J:
+
+```
+... | VERIFY: file content vs Wikipedia article on <work-title>
+```
+
+The QC reviewer (Ryan / Hannah) eyeballs the downloaded file in Drive, confirms it matches the brief's intended subject, and clears the VERIFY by removing the annotation. Failed verifications trigger a re-source. Files with explicit subject names (`Tissot The Exodus.jpg`, `Pieter Bruegel - The Harvesters - Google Art Project.jpg`) don't need VERIFY — the filename itself is the verification.
 
 ## Fair Use for Commentary on a Named Person or Place (v1; generalized in v4 — see Tier 4)
 
@@ -425,5 +466,6 @@ Internet Archive hosts substantial collections relevant to our workflow. Per-ite
 - **v1 (2026-04-21)** — Incorporated Ryan's row-by-row critique of the full BriefOnly dry run (`Feedback/Ryans-Feedback-2026-04-21-1016.md`). Added 3 winning patterns (historical-lane continuity, subject + context pairing, zodiac-placement rule) and 1 forbidden move (zodiac leading a calendar beat). Density target intentionally unchanged — Ryan noted the over-coverage was tolerable and he wants more options in practice; revisit scheduled after a second pass (tracked in `ROADMAP.md`). Two architectural blockers from the same review were addressed in separate commits: BRIEF column (commit d69b6eb) and image-only scope narrowing (commit b70c300).
 - **v2 (2026-04-24)** — ch01-1 FCP-timeline review. Scientific beats landed; historical beats miscategorized as fine-art when the pedagogical point was the scientific *object* (star charts, diagrams, catalogs). Dichotomy beats (evolution-vs-gravity) briefed as single images when the contrast itself was the point. Added: **`TYPE:artifact`** as a fourth primary tag (scientific artifacts: star charts, celestial maps, astronomical diagrams, manuscript pages, period instruments). Added: **Dichotomy / comparison pattern** — always `TYPE:cycle:2` for A-vs-B beats. Added: **Read-ahead rule** — brief-writer reads next ~3 rows of AUDIO before committing, defaults to section-at-a-time walk. Two new Forbidden Moves (#10 portraits where artifact carries the point, #11 single image on dichotomy beats). New winning pattern (artifact-over-portrait, dichotomy-as-cycle). Subject-Specific Preferences matrix to codify the ch01-1 misses.
 - **v3 (2026-04-24)** — Editorial-principles conversation after the v2 fixes. Added five teacher/editor principles as a first-class section: (1) **narrative arc** (soft, multi-scale — sub-section / section / chapter; sub-section arcs are often the right granularity for technical content where section arcs fail); (2) **analogy vs identity** (analogy-signaling language means the image is the metaphor, not the referent); (3) **"Why this, why now?" forcing question** with optional `WHY:` brief field; (4) **brief-as-hypothesis `OR` alternatives** when multiple images serve equally well; (5) **cross-beat annotation layer** (`RHYMES-WITH:`, `SETS-UP:`, `CALLBACK-TO:`, `PAYS-OFF:`). Principles are guidance, not rigid; `TYPE:speaker` and course-level visual lexicon were considered and explicitly deferred.
+- **v6 (2026-04-26)** — Codified the v1+v5 sourcing-pattern lessons after pattern-matching on recurring back-and-forths. Six concrete sourcing rules, all in the **Sourcing Criteria** section: (1) **Width-based 2000px floor** (not long-edge), 4000px+ width preferred for 4K-ready editing — accounts for portrait paintings whose total pixels are large but whose width is too narrow for 16:9 timelines. (2) **Aspect ratio guidance** — landscape preferred when available, portrait acceptable when only option (editor frames at edit time); no explicit annotation needed. (3) **Planar reproduction over installation photo** — visible frames, perspective foreshortening, museum interior context = reject; find the Google Art Project / museum digital archive scan. (4) **HS "2-second rule"** for legibility on `TYPE:historical/artifact/art` picks — if a HS student wouldn't recognize what the image shows in 2 seconds, the pick fails. **Image-as-subject exception** when AUDIO narrates the image (e.g., future Hertzsprung-Russell diagram walks where Faulkner spends minutes explaining stellar evolution). Heuristic: scan AUDIO for next ~30s after the image appears. (5) **Default to 3 OR alternatives** for `TYPE:art/historical/artifact` picks — single picks are the wrong default, art availability is variable. `TYPE:science` stays single (canonical NASA imagery is deterministic). `TYPE:cycle:N` opts out — one canonical asset per slot, swap if Ryan flags. (6) **`VERIFY:` annotation** in BRIEFS for ambiguous filename patterns (numbered files, "Plate XXIV", folio refs, numeric IDs) — QC reviewer eyeballs in Drive and clears. Catches the v5 Giotto-di-Bondone-006 mislabeling pattern.
 - **v5 (2026-04-24)** — Added **Tier 0 — Compass local galleries (GalleryQuery)** at the top of the Sourcing Location Hierarchy. Points at Ben's new `GalleryQuery` skill (`bens-skills/GalleryQuery`), a thin HTTP adapter over the on-prem paintings catalog on ccmini (40,936 classical paintings, CLIP + FTS5 + SQL) and the future science gallery (~4,000 curated images, offline until endpoints stabilize). Pre-cleared PD license posture — zero per-item verification needed. Tier 0 is the default first probe for `TYPE:art` and `TYPE:historical` beats (and will be for `TYPE:science` / `TYPE:artifact` once the science gallery comes online). Misses are silent — non-zero exit or empty result means "move to Tier 1," no brief annotation, no `NOTE:` flag. Sourcer should still skip Tier 0 for purpose-specific external assets (Bayer Uranometria, Commons-specific works) and for NASA / Hubble / JWST / ESO imagery where Tier 1 is purpose-built.
 - **v4 (2026-04-24)** — Adopted **full Documentary Filmmakers' Best Practices in Fair Use** (Center for Social Media, 2005) as **Tier 4** in the Sourcing Location Hierarchy. Three applicable classes: #1 critique, #2 illustration (broadest / most useful), #4 historical sequence. Added the `FAIR-USE: <class> | <rationale>` brief annotation as mandatory for Tier 4 picks. Added **archive.org** as a cross-cutting source (Tier 1/2/3/4 depending on per-item `licenseurl`) — specifically notable for 19th–20th c. astronomy book scans (goldmine for `TYPE:artifact`), NASA HQ press photography, Prelinger Archives. **Manual-download moved to Tier 5 (last resort)** from v1's implicit "tier 4" position — manual sourcing requires human-in-the-loop effort, so it should only be invoked when all scrapable/fair-use paths have been exhausted. Formalized the Sourcing Location Hierarchy as its own top-level section. Codified the per-course used-image registry (referenced earlier, now load-bearing) and technical sourcing rules (Commons API verification, browser UA, rate-limit handling, NASA SVS variant hunting).
